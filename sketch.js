@@ -1,4 +1,4 @@
-import domtoimage from '/node_modules/dom-to-image/dist/dom-to-image.min.js';
+import domtoimage from './node_modules/dom-to-image/src/dom-to-image';
 let gridSize = 16;
 const container = document.querySelector('.grid');
 const colourPicker = document.querySelector('#color');
