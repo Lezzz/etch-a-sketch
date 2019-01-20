@@ -1,4 +1,3 @@
-import domtoimage from 'dom-to-image/dist/dom-to-image.min.js';
 let gridSize = 16;
 const container = document.querySelector('.grid');
 const colourPicker = document.querySelector('#color');
@@ -59,16 +58,4 @@ reset.addEventListener('click', function(e){
         grid();
         
     };
-});
-
-let save = document.getElementById('save_btn');
-save.addEventListener('click',function(){
-domtoimage.toJpeg(document.getElementById('sketch'), { quality: 0.95 })
-    .then(function (dataUrl) {
-        var link = document.createElement('a');
-        link.download = 'Sketch.jpeg';
-        link.href = dataUrl;
-        link.click();
-    });
-
 });
