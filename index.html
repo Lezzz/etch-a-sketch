@@ -13,12 +13,12 @@
         <h1>Etch-A-Sketch</h1>
         <p>Hold LMB to draw and RMB to erase.</p>
         <div class="buttons">
-            <button id="save" class="save_btn" >save</button>
+            <button id="save" class="save_btn" >Save as JPG</button>
             <button id="reset" class ="reset_btn">reset</button>
             <button id="resize" class ="resize_btn">resize</button>
             <input id ="color" type="color" value="#FFFFFF"></input>
         </div>
-        <div class ="grid" oncontextmenu ="return false;"></div>
+        <div class ="grid" id="grid" oncontextmenu ="return false;"></div>
         <p>
             current grid:
             <span class="info"></span>
