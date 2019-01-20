@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Etch-A-Sketch</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400i" rel="stylesheet">
 </head>
 <body>
-    <button type="button" name="reset">Clear</button>
-    <form>
-        <div>
-            <input type="radio" name="selection" value="16" checked>
-            <label for="16">16</label>
+    <div class ="container">
+        <h1>Etch-A-Sketch</h1>
+        <p>Hold LMB to draw and RMB to erase.</p>
+        <div class="buttons">
+            <button id="save" class="save_btn" >save</button>
+            <button id="reset" class ="reset_btn">reset</button>
+            <button id="resize" class ="resize_btn">resize</button>
+            <input id ="color" type="color" value="#87CEEB"></input>
         </div>
-        <div>
-            <input type="radio" name="selection" value="64">
-            <label for="64">64</label>
-        </div>
-        <div>
-            <input type="radio" name="selection" value="128">
-            <label for="128">128</label>
-        </div>
+        <div class ="grid" oncontextmenu ="return false;"></div>
+        <p>
+            current grid:
+            <span class="info"></span>
 
-    </form>
-    <div class="container"></div>
-    <script type="text/javascript" src="sketch.js"></script>
-
+        </p>
+    </div>
+    
+    <script src="sketch.js"></script>
 </body>
 
 </html></html>

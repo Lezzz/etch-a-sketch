@@ -1,77 +1,61 @@
-let divsArray = [];
 let gridSize = 16;
-const WINDOW = 1024
+const container = document.querySelector('.grid');
+const colourPicker = document.querySelector('#color');
 
+function grid(){
 
+    for (let i = 0; i< gridSize*gridSize; i++){
+        let newDiv = document.createElement('div');
+        container.appendChild(newDiv).classList.add('grid-item');
 
-const container = document.querySelector('.container');
+        const gridItem = document.querySelectorAll('.grid-item')[i];
+        gridItem.style.height = (600/gridSize)+"px";
+        gridItem.style.width = (600/gridSize)+"px";
 
-const resetButton = document.querySelector('button');
-resetButton.addEventListener('click', reset);
+        document.querySelector('.info').textContent = gridSize +" x "+gridSize;
 
-const radioButtons = document.querySelectorAll('input');
+        gridItem.addEventListener('click', function(e){
+            this.style.background = colourPicker.value;
+        });
 
-createGrid();
+        gridItem.addEventListener('mousemove',function (e){
+            //left mouse button for drawing
+            if (e.buttons ==1){
+                this.style.background = colourPicker.value;
+            }
+            //right mouse button for erasing
+            if (e.buttons ==2){
+                this.style.background = '#ffffff40'
+            }
+        });
+    };
+};
+grid();
 
-for (let i = 0; i < radioButtons.length; i++) {
-    radioButtons[i].addEventListener('click', function() {
-      gridSize = radioButtons[i].value;
-      deleteGrid();
-      createGrid();
-    });
-  }
-
-function reset() {
-    for (var i = 0; i < gridSize; i++) {
-      divsArray[i].style.backgroundColor = 'rgb(255,255,255)';
+let resize = document.getElementById('resize');
+resize.addEventListener('click',function (e){
+    container.innerHTML="";
+    gridSize= parseInt(prompt('Please insert grid size (less than 62): '))
+    if (gridSize < 62 && gridSize >0){
+    grid();
     }
-  }
-
-function createGrid(){
-    let divSize = WINDOW / (Math.sqrt(gridSize))-4;
-    for (let i = 0; i < gridSize ; i++){
-        divsArray[i] = document.createElement('div');
-        divsArray[i].style.height = divSize-1 +'px';
-        divsArray[i].style.width = divSize-1 +'px';
-        divsArray[i].style.border = '1px solid black';
-        divsArray[i].style.backgroundColor = 'rgb(255,255,255)';
-        container.appendChild(divsArray[i]);
-        divsArray[i].addEventListener('mouseover',colorIt);
+    else {
+        alert('Grid size capped at 61.');
+        gridSize = 61;
+        grid();
     }
 
-}
+    
+});
 
-function colorIt(e) {
-    if (e.target.style.backgroundColor == 'rgb(255, 255, 255)') {
-      e.target.style.backgroundColor = randomColor();
-    } else {
-      e.target.style.backgroundColor = shadeRGBColor(e.target.style.backgroundColor, -0.25);
-    }
-  }
-  
-  function deleteGrid() {
-    while (container.firstChild) {
-      container.removeChild(container.firstChild);
-    }
-  }
-
-  function randomColor() {
-    let R = Math.floor(Math.random() * (250 - 140)) + 140;
-    let G = Math.floor(Math.random() * (250 - 140)) + 140;
-    let B = Math.floor(Math.random() * (250 - 140)) + 140;
-    return 'rgb(' + R + ',' + G + ',' + B + ')';
-  }
-  
-  function shadeRGBColor(color, percent) {
-    var f = color.split(","),
-      t = percent < 0 ? 0 : 255,
-      p = percent < 0 ? percent * -1 : percent,
-      R = parseInt(f[0].slice(4)),
-      G = parseInt(f[1]),
-      B = parseInt(f[2]);
-    return "rgb(" + (Math.round((t - R) * p) + R) + "," + (Math.round((t - G) * p) + G) + "," + (Math.round((t - B) * p) + B) + ")";
-  }
-
-
-
+let reset = document.getElementById('reset');
+reset.addEventListener('click', function(e){
+    if (confirm('Are you sure? ')){
+        while(container.firstChild){
+            container.removeChild(container.firstChild);
+        };
+        grid();
+        
+    };
+});
 
